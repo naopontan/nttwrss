@@ -4,7 +4,11 @@ class MyRequest < ActiveRecord::Base
 
   has_many :feeds, :dependent => :destroy
 
-  URL = 'http://www.info-construction.ntt-west.co.jp/info-report/ku010/kU010200/'
+  URL = 'http://www.info-construction.ntt-west.co.jp/info-report/ku010/kU010200/' # 故障情報
+
+  def self.latest
+    self.all(:order => 'created_at DESC', :limit => 1).first
+  end
 
   def self.get(url)
     feeds = RSS::Parser.parse(url)

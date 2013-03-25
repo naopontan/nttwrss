@@ -1,4 +1,10 @@
 class MyRequestsController < ApplicationController
+
+  def latest
+    @my_request = MyRequest.latest
+    render :show
+  end
+
   # GET /my_requests
   # GET /my_requests.json
   def index
