@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Url</th>
+    <th>Feed Count</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +12,7 @@
 <% @my_requests.each do |my_request| %>
   <tr>
     <td><%= my_request.url %></td>
+    <td><%= my_request.feeds.count %></td>
     <td><%= link_to 'Show', my_request %></td>
     <td><%= link_to 'Edit', edit_my_request_path(my_request) %></td>
     <td><%= link_to 'Destroy', my_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
