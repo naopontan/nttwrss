@@ -5,6 +5,17 @@
   <%= @my_request.url %>
 </p>
 
+<p>
+  <b>Created At:</b>
+  <%= @my_request.created_at %>
+</p>
+
+<ul>
+<% @my_request.feeds.each do |feed| %>
+  <li><%= link_to(feed.title, feed.link, :target => "_blank") %></li>
+<% end %>
+</ul>
+
 
 <%= link_to 'Edit', edit_my_request_path(@my_request) %> |
 <%= link_to 'Back', my_requests_path %>
