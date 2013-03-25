@@ -1,6 +1,7 @@
 Nttwrss::Application.routes.draw do
-  resources :my_requests
-
+  resources :my_requests do
+    resources :feeds
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

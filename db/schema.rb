@@ -11,16 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325071148) do
+ActiveRecord::Schema.define(:version => 20130325073308) do
 
   create_table "feeds", :force => true do |t|
+    t.integer  "my_request_id"
     t.string   "title"
     t.string   "link"
     t.string   "description"
     t.datetime "pub_date"
     t.text     "content"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "feeds", ["my_request_id"], :name => "index_feeds_on_my_request_id"
+
+  create_table "my_requests", :force => true do |t|
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
