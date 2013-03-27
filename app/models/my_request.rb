@@ -28,6 +28,7 @@ class MyRequest < ActiveRecord::Base
         link: item.link,
         description: item.description,
         pub_date: item.pubDate,
+        content: content,
       )
     end
     m.save!
