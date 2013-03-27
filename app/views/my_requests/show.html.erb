@@ -1,4 +1,11 @@
+<%= form_tag latest_path do %>
+  内容を検索: <%= text_field_tag :keyword, params[:keyword] %>
+  <%= submit_tag 'search' %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
+
+件数: <%= @feeds.count %>
 
 <p>
   <b>Url:</b>
@@ -11,7 +18,7 @@
 </p>
 
 <ul>
-<% @my_request.feeds.each do |feed| %>
+<% @feeds.each do |feed| %>
   <li><%= link_to(feed.title, feed.link, :target => "_blank") %></li>
 <% end %>
 </ul>

@@ -1,7 +1,13 @@
+# -*- coding: utf-8 -*-
 class MyRequestsController < ApplicationController
 
   def latest
-    @my_request = MyRequest.latest  # FIXME: 複数の feeds から「沖縄」を抽出できるようにする
+    @my_request = MyRequest.latest
+    @feeds = if params[:keyword].present?
+               @my_request.feeds.where(["content LIKE ?", "%#{params[:keyword]}%"])
+             else
+               @my_request.feeds
+             end
     render :show
   end
 
@@ -20,6 +26,7 @@ class MyRequestsController < ApplicationController
   # GET /my_requests/1.json
   def show
     @my_request = MyRequest.find(params[:id])
+    @feeds = @my_request.feeds
 
     respond_to do |format|
       format.html # show.html.erb
