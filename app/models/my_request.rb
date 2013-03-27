@@ -12,8 +12,7 @@ class MyRequest < ActiveRecord::Base
 
   def self.get(url)
     feeds = RSS::Parser.parse(url)
-    items = $DEBUG || !Rails.env.production? ? feeds.items[0..3] : feeds.items
-    items = feeds.items[0..3]
+    items = feeds.items
     items.inject([]) do |m, item|
       contents = "" # ruby の scopeの話
       open(item.link) {|f| contents = f.read}
