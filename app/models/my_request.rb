@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'rss'
 class MyRequest < ActiveRecord::Base
   attr_accessible :url
@@ -27,11 +28,31 @@ class MyRequest < ActiveRecord::Base
         title: item.title,
         link: item.link,
         description: item.description,
-        pub_date: item.pubDate,
+        pub_date: item.pubDate, # item.date と何が違う?
         content: content,
       )
     end
     m.save!
+  end
+
+  def get_rss
+    rss = RSS::Maker.make("2.0") do |maker|
+      # TODO: 名前とか決めろ
+      maker.channel.about = 'hoge-about'
+      maker.channel.title = 'hoge-title'
+      maker.channel.description = 'hoge-description'
+      maker.channel.link = 'hoge-link'
+
+      feeds.each do |feed|
+        maker.items.new_item do |item|
+          item.link        = feed.link
+          item.title       = feed.title
+          item.description = feed.description
+          item.date        = feed.pub_date.to_s # to_s しないと NameError: undefined method `w3cdtf' for class `ActiveSupport::TimeWithZone'
+        end
+      end
+    end
+    rss
   end
 
 end

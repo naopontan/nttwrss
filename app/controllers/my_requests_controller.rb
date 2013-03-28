@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class MyRequestsController < ApplicationController
 
+  # TODO: 例えば link_to 'RSS', latest_path(:rss) とかできるん？
   def latest
     @my_request = MyRequest.latest
     @feeds = if params[:keyword].present?
